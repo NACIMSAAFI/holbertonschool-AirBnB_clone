@@ -33,13 +33,10 @@ class FileStorage:
         from models.base_model import BaseModel
         from models.user import User
 
-        try:
+        if isfile(self.__file_path):
             with open(self.__file_path, "r") as file:
                 data = json.load(file)
                 for key, value in data.items():
                     class_name, obj_id = key.split(".")
                     class_ = eval(class_name)
                     self.__objects[key] = class_(**value)
-        except FileNotFoundError:
-            print("File not found:", self.__file_path)
-
