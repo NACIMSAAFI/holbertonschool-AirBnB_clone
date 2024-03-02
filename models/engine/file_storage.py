@@ -23,21 +23,23 @@ class FileStorage:
 
     def save(self):
         """Serializes __objects to the JSON file (path: __file_path)"""
-        dic_data = {}
-        with open(self.__file_path, "w", encoding="utf-8") as File:
-            for key, obj in self.__objects.items():
-                dic_data[key] = obj.to_dict()
-            File.write(json.dumps(dic_data))
+        with open(self.__file_path, "w") as file:
+            json.dump({
+                key: obj.to_dict() for key, obj in self.__objects.items()},
+                file)
 
     def reload(self):
         """Deserializes the JSON file to __objects"""
         from models.base_model import BaseModel
         from models.user import User
 
-        if isfile(self.__file_path):
+        try:
             with open(self.__file_path, "r") as file:
                 data = json.load(file)
                 for key, value in data.items():
                     class_name, obj_id = key.split(".")
                     class_ = eval(class_name)
                     self.__objects[key] = class_(**value)
+        except FileNotFoundError:
+            print("File not found:", self.__file_path)
+
