@@ -5,8 +5,11 @@ Console module
 import cmd
 import shlex
 from models.base_model import BaseModel
-from models import storage
 from models.user import User
+from models import storage
+
+my_classes = [
+    "BaseModel", "User", "State", "City", "Amenity", "Place", "Review"]
 
 
 class HBNBCommand(cmd.Cmd):
@@ -28,16 +31,17 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_create(self, arg):
-        """Creates a new instance of BaseModel and saves it to JSON"""
+        """Creates a new instance of a class and saves it to JSON"""
         args = shlex.split(arg)
         if not args:
             print("** class name missing **")
             return
         class_name = args[0]
-        if class_name != "BaseModel":
+        if class_name not in my_classes:
             print("** class doesn't exist **")
             return
-        new_instance = BaseModel()
+        cls = getattr(__import__('models'), class_name)
+        new_instance = cls()
         new_instance.save()
         print(new_instance.id)
 
@@ -47,12 +51,12 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print("** class name missing **")
             return
-        class_name = args[0]
-        if class_name != "BaseModel":
-            print("** class doesn't exist **")
-            return
         if len(args) < 2:
             print("** instance id missing **")
+            return
+        class_name = args[0]
+        if class_name not in my_classes:
+            print("** class doesn't exist **")
             return
         instance_id = args[1]
         key_to_search = class_name + "." + instance_id
@@ -68,12 +72,12 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print("** class name missing **")
             return
-        class_name = args[0]
-        if class_name != "BaseModel":
-            print("** class doesn't exist **")
-            return
         if len(args) < 2:
             print("** instance id missing **")
+            return
+        class_name = args[0]
+        if class_name not in my_classes:
+            print("** class doesn't exist **")
             return
         instance_id = args[1]
         key_to_search = class_name + "." + instance_id
@@ -85,22 +89,20 @@ class HBNBCommand(cmd.Cmd):
         storage.save()
 
     def do_all(self, arg):
-        """Prints all string representation of all instances
-        based or not on the class name"""
+        """Prints all string representations of instances"""
         args = shlex.split(arg)
         if not args:
             all_objs = storage.all()
             for obj in all_objs.values():
                 print(obj)
             return
-        if len(args) < 2:
-            class_name = args[0]
-            if class_name != "BaseModel":
-                print("** class doesn't exist **")
-                return
+        class_name = args[0]
+        if class_name not in my_classes:
+            print("** class doesn't exist **")
+            return
         all_objs = storage.all()
         for key, obj in all_objs.items():
-            if class_name in key:
+            if key.split('.')[0] == class_name:
                 print(obj)
 
     def do_update(self, arg):
@@ -109,12 +111,12 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print("** class name missing **")
             return
-        class_name = args[0]
-        if class_name != "BaseModel":
-            print("** class doesn't exist **")
-            return
         if len(args) < 2:
             print("** instance id missing **")
+            return
+        class_name = args[0]
+        if class_name not in my_classes:
+            print("** class doesn't exist **")
             return
         instance_id = args[1]
         key_to_search = class_name + "." + instance_id
@@ -130,9 +132,6 @@ class HBNBCommand(cmd.Cmd):
             return
         attribute_name = args[2]
         attribute_value = args[3]
-        if attribute_name in ["id", "created_at", "updated_at"]:
-            print("** can't update attribute **")
-            return
         setattr(all_objs[key_to_search], attribute_name, attribute_value)
         all_objs[key_to_search].save()
         print(all_objs[key_to_search])
