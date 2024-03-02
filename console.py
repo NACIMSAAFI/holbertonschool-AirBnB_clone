@@ -75,15 +75,14 @@ class HBNBCommand(cmd.Cmd):
         if len(args) < 2:
             print("** instance id missing **")
             return
-        else:
-            key = f"{args[0]}.{args[1]}"
-            obj = storage.all()
-            if key in obj:
-                del obj[key]
-                storage.save()
-            else:
-                print("** no instance found **")
-
+        instance_id = args[1]
+        key_to_search = class_name + "." + instance_id
+        all_objs = storage.all()
+        if key_to_search not in all_objs:
+            print("** no instance found **")
+            return
+        del all_objs[key_to_search]
+        storage.save()
 
     def do_all(self, arg):
         """Prints all string representation of all instances
