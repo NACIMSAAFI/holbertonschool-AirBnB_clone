@@ -34,7 +34,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         class_name = args[0]
-        if class_name not in globals():":
+        if class_name != "BaseModel":
             print("** class doesn't exist **")
             return
         new_instance = BaseModel()
@@ -48,7 +48,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         class_name = args[0]
-        if class_name not in globals():
+        if class_name != "BaseModel":
             print("** class doesn't exist **")
             return
         if len(args) < 2:
@@ -69,7 +69,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         class_name = args[0]
-        if class_name not in globals():
+        if class_name != "BaseModel":
             print("** class doesn't exist **")
             return
         if len(args) < 2:
@@ -95,7 +95,7 @@ class HBNBCommand(cmd.Cmd):
             return
         if len(args) < 2:
             class_name = args[0]
-            if class_name not in globals():
+            if class_name != "BaseModel":
                 print("** class doesn't exist **")
                 return
         all_objs = storage.all()
@@ -110,7 +110,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         class_name = args[0]
-        if class_name not in globals():
+        if class_name != "BaseModel":
             print("** class doesn't exist **")
             return
         if len(args) < 2:
