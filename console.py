@@ -3,12 +3,10 @@
 Console module
 """
 import cmd
-import json
 import shlex
 from models.base_model import BaseModel
 from models import storage
 from models.user import User
-import re
 
 
 class HBNBCommand(cmd.Cmd):
