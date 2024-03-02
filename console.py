@@ -95,7 +95,7 @@ class HBNBCommand(cmd.Cmd):
         if len(args) < 2:
             class_name = args[0]
             if class_name != "BaseModel":
-                print("** invalid class name **")
+                print("** class doesn't exist **")
                 return
         all_objs = storage.all()
         for key, obj in all_objs.items():
