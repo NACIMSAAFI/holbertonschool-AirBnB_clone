@@ -3,6 +3,7 @@
 Console module
 """
 import cmd
+import json
 import shlex
 from models.base_model import BaseModel
 from models import storage
