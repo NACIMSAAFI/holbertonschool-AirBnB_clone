@@ -13,6 +13,8 @@ class HBNBCommand(cmd.Cmd):
     """Command interpreter class"""
 
     prompt = "(hbnb) "
+    my_classes = ["BaseModel", "User", "State", "City",
+                  "Amenity", "Place", "Review"]
 
     def do_quit(self, arg):
         """Quit command to exit the program"""
@@ -48,7 +50,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         class_name = args[0]
-        if class_name != "BaseModel":
+        if class_name not in self.my_classes:
             print("** class doesn't exist **")
             return
         if len(args) < 2:
@@ -69,7 +71,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         class_name = args[0]
-        if class_name != "BaseModel":
+        if class_name not in self.my_classes:
             print("** class doesn't exist **")
             return
         if len(args) < 2:
@@ -95,7 +97,7 @@ class HBNBCommand(cmd.Cmd):
             return
         if len(args) < 2:
             class_name = args[0]
-            if class_name != "BaseModel":
+            if class_name not in self.my_classes:
                 print("** class doesn't exist **")
                 return
         all_objs = storage.all()
@@ -110,7 +112,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         class_name = args[0]
-        if class_name != "BaseModel":
+        if class_name not in self.my_classes:
             print("** class doesn't exist **")
             return
         if len(args) < 2:
