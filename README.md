@@ -1,10 +1,10 @@
 
-#AirBnB Clone - The Console
+# AirBnB Clone - The Console
 
-#Description:
+## Description:
 This project is a simplified version of the AirBnB website, focusing on the backend functionality. The core component of this project is the command-line interpreter, or console, which allows users to interact with the underlying data models of the application.
 
-#Command Interpreter:
+## Command Interpreter:
 
 Starting the Console:
 To start the console, follow these steps:
@@ -15,7 +15,8 @@ Run the console.py file using Python 3.
 
 $ python3 console.py
 
-#Using the Console:
+## Using the Console:
+
 Once the console is running, you can use various commands to interact with the data models. Here are the available commands:
 
 create: Create a new instance of a data model and save it to the database.
@@ -26,7 +27,7 @@ all: Display details of all instances of a specific data model or of all data mo
 
 update: Update the attributes of a specific instance.
 
-#Examples:
+## Examples:
 
 To create a new User instance:
 
@@ -50,5 +51,5 @@ To update the email attribute of a specific User instance with ID "123":
 
 These are just a few examples of how you can use the console to interact with the data models. Feel free to explore other commands and functionalities!
 
-#Authors 👩‍💻
+# Authors 👩‍💻
 @NacimSaafi
