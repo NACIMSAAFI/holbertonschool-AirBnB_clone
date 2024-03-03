@@ -5,9 +5,7 @@
 """
 
 import json
-from os.path import isfile
-from models.user import User
-
+from os.path import exists
 
 
 class FileStorage:
@@ -35,7 +33,7 @@ class FileStorage:
         from models.base_model import BaseModel
         from models.user import User
 
-        if isfile(self.__file_path):
+        if exists(self.__file_path):
             with open(self.__file_path, "r") as file:
                 data = json.load(file)
                 for key, value in data.items():
