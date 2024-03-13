@@ -5,11 +5,11 @@ body {
     color: #484848;
 }
 
-.container {
+.container{
     max-width: 1000px;
-    margin: 30px auto;
+    margin: 30px auto 30px auto;
+    position: relative;
 }
-
 button {
     cursor: pointer;
 }
